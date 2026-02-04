@@ -32,7 +32,8 @@ def index():
 
 @app.route('/<path:filename>')
 def serve_static_files(filename):
-    """CSS, JS, 이미지 등 정적 파일들을 제공합니다."""
+    """CSS, JS, 이미지 등 정적 파일
+    들을 제공합니다."""
     # frontend 디렉토리 내의 파일만 제공하도록 합니다.
     # 예를 들어, 사용자가 '/backend/app.py' 와 같이 잘못된 경로를 요청하는 것을 방지합니다.
     return send_from_directory(frontend_dir, filename)

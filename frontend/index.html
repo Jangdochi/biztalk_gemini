@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,8 +7,42 @@
     <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-    <h1>BizTone Converter Frontend</h1>
-    <p>This is a placeholder for the frontend application.</p>
+    <div class="container">
+        <header>
+            <h1>BizTone Converter</h1>
+        </header>
+        <main>
+            <section class="input-section card">
+                <h2>원문 입력</h2>
+                <textarea id="keywordsInput" placeholder="변환할 메시지를 입력하세요 (최대 500자)" maxlength="500"></textarea>
+                <div class="char-count">
+                    <span id="currentCharCount">0</span> / 500
+                </div>
+                <div class="persona-selection">
+                    <label for="personaSelect">대상 선택:</label>
+                    <select id="personaSelect">
+                        <option value="upward">상사 (Upward)</option>
+                        <option value="lateral">타팀 동료 (Lateral)</option>
+                        <option value="external">고객 (External)</option>
+                    </select>
+                </div>
+                <button id="convertButton" class="primary-button">변환하기</button>
+            </section>
+
+            <section class="output-section card">
+                <h2>변환 결과</h2>
+                <textarea id="convertedMessageOutput" readonly placeholder="변환된 메시지가 여기에 표시됩니다."></textarea>
+                <div class="output-actions">
+                    <button id="copyButton" class="secondary-button" disabled>복사하기</button>
+                    <div class="feedback-buttons">
+                        <button id="feedbackHelpful" class="feedback-button">👍 도움됨</button>
+                        <button id="feedbackNotHelpful" class="feedback-button">👎 도움 안 됨</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+        <div id="messageContainer" class="message-container"></div>
+    </div>
     <script src="js/script.js"></script>
 </body>
 </html>
