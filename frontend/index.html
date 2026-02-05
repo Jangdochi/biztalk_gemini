@@ -4,44 +4,57 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>BizTone Converter</title>
-    <link rel="stylesheet" href="css/style.css">
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="container">
-        <header>
-            <h1>BizTone Converter</h1>
+<body class="bg-gray-100 text-gray-800 font-sans">
+    <div class="container mx-auto max-w-5xl p-4 sm:p-6 lg:p-8">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl font-bold text-blue-600">BizTone Converter</h1>
         </header>
-        <main>
-            <section class="input-section card">
-                <h2>원문 입력</h2>
-                <textarea id="keywordsInput" placeholder="변환할 메시지를 입력하세요 (최대 500자)" maxlength="500"></textarea>
-                <div class="char-count">
+        <main class="flex flex-col md:flex-row gap-8">
+            <!-- Input Section -->
+            <section class="flex-1 bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-700">원문 입력</h2>
+                <textarea id="keywordsInput" class="w-full h-40 p-3 border border-gray-300 rounded-md focus:ring-2 focus:ring-blue-500 focus:border-transparent transition" placeholder="변환할 메시지를 입력하세요 (최대 500자)" maxlength="500"></textarea>
+                <div class="text-sm text-gray-500 text-right mt-2">
                     <span id="currentCharCount">0</span> / 500
                 </div>
-                <div class="persona-selection">
-                    <label for="personaSelect">대상 선택:</label>
-                    <select id="personaSelect">
+                <div class="mt-4">
+                    <label for="personaSelect" class="block text-lg font-medium text-gray-700 mb-2">대상 선택:</label>
+                    <select id="personaSelect" class="w-full p-3 border border-gray-300 rounded-md bg-white focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                         <option value="upward">상사 (Upward)</option>
                         <option value="lateral">타팀 동료 (Lateral)</option>
                         <option value="external">고객 (External)</option>
                     </select>
                 </div>
-                <button id="convertButton" class="primary-button">변환하기</button>
+                <button id="convertButton" class="w-full mt-6 bg-blue-600 text-white font-bold py-3 px-4 rounded-lg hover:bg-blue-700 transition-colors duration-300 disabled:bg-blue-400 disabled:cursor-not-allowed">
+                    변환하기
+                </button>
             </section>
 
-            <section class="output-section card">
-                <h2>변환 결과</h2>
-                <textarea id="convertedMessageOutput" readonly placeholder="변환된 메시지가 여기에 표시됩니다."></textarea>
-                <div class="output-actions">
-                    <button id="copyButton" class="secondary-button" disabled>복사하기</button>
-                    <div class="feedback-buttons">
-                        <button id="feedbackHelpful" class="feedback-button">👍 도움됨</button>
-                        <button id="feedbackNotHelpful" class="feedback-button">👎 도움 안 됨</button>
+            <!-- Output Section -->
+            <section class="flex-1 bg-white rounded-lg shadow-md p-6">
+                <h2 class="text-2xl font-semibold mb-4 text-gray-700">변환 결과</h2>
+                <textarea id="convertedMessageOutput" class="w-full h-40 p-3 border border-gray-300 rounded-md bg-gray-50" readonly placeholder="변환된 메시지가 여기에 표시됩니다."></textarea>
+                <div class="mt-4 flex justify-between items-center">
+                    <button id="copyButton" class="bg-gray-200 text-gray-700 font-semibold py-2 px-5 rounded-lg hover:bg-gray-300 transition-colors disabled:bg-gray-200 disabled:text-gray-400 disabled:cursor-not-allowed">
+                        복사하기
+                    </button>
+                    <div class="flex items-center gap-2">
+                        <button id="feedbackHelpful" class="p-2 rounded-full hover:bg-gray-200 transition-colors text-gray-500 hover:text-green-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 10h4.764a2 2 0 011.789 2.894l-3.5 7A2 2 0 0115.263 21h-4.017c-.993 0-1.902-.423-2.545-1.124l-3.33-4.002c-.52-.624-.658-1.48-.37-2.228a2 2 0 011.8-1.296h3.418c.394 0 .77-.163.999-.448l2.5-3.5a2 2 0 013.464 2.464L14.333 10" /></svg>
+                        </button>
+                        <button id="feedbackNotHelpful" class="p-2 rounded-full hover:bg-gray-200 transition-colors text-gray-500 hover:text-red-500">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14H5.236a2 2 0 01-1.789-2.894l3.5-7A2 2 0 018.738 3h4.017c.993 0 1.902.423 2.545 1.124l3.33 4.002c.52.624.658 1.48.37 2.228a2 2 0 01-1.8 1.296h-3.418c-.394 0-.77.163-.999.448l-2.5 3.5a2 2 0 01-3.464-2.464L9.667 14" /></svg>
+                        </button>
                     </div>
                 </div>
             </section>
         </main>
-        <div id="messageContainer" class="message-container"></div>
+        <!-- Message/Toast Container -->
+        <div id="messageContainer" class="fixed bottom-5 left-1/2 -translate-x-1/2 px-6 py-3 rounded-lg shadow-lg text-white transition-all duration-300 opacity-0 transform translate-y-4">
+            Message goes here
+        </div>
     </div>
     <script src="js/script.js"></script>
 </body>

@@ -11,14 +11,28 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function showMessage(message, type) {
         messageContainer.textContent = message;
-        messageContainer.className = 'message-container show'; // Reset and show
-        if (type) {
-            messageContainer.classList.add(type);
+        
+        // Reset classes
+        messageContainer.classList.remove('bg-green-500', 'bg-red-500', 'opacity-0', 'translate-y-4');
+        
+        // Apply type-specific classes
+        if (type === 'success') {
+            messageContainer.classList.add('bg-green-500');
+        } else if (type === 'error') {
+            messageContainer.classList.add('bg-red-500');
+        } else {
+            messageContainer.classList.add('bg-gray-800');
         }
 
+        // Show the message
+        messageContainer.classList.remove('opacity-0', 'translate-y-4');
+        messageContainer.classList.add('opacity-100', 'translate-y-0');
+
+        // Hide after 3 seconds
         setTimeout(() => {
-            messageContainer.classList.remove('show', type);
-        }, 3000); // Hide after 3 seconds
+            messageContainer.classList.remove('opacity-100', 'translate-y-0');
+            messageContainer.classList.add('opacity-0', 'translate-y-4');
+        }, 3000);
     }
 
     async function copyToClipboard(text) {
